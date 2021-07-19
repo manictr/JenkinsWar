@@ -1,0 +1,6 @@
+---
+- hosts: 172.31.29.87
+  become: yes
+  tasks:
+    - name: Deploy Webpage to path=/var/www/html/ansible
+      copy: src=target/JenkinsWar.war dest=/usr/local/tomcat9/webapps/ mode=0644
