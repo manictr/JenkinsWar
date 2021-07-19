@@ -1,11 +1,11 @@
-- hosts: 172.31.29.87
+- hosts: control
   become: yes
   tasks:
     - name: Running mvn clean
-      shell: /opt/maven/bin/mvn clean install
+      shell: "/opt/maven/bin/mvn clean install"
       register: mvn_result
-    - name: /opt/maven/bin/mvn clean task output
+    - name: "/opt/maven/bin/mvn clean task output"
       debug:
         var: mvn_result
     - name: Deploy Webpage to path=/var/www/html/ansible
-      copy: src=target/JenkinsWar.war dest=/usr/local/tomcat9/webapps/ mode=0644
+      shell: "scp target/JenkinsWar.war root@172.31.29.87:/usr/local/tomcat9/webapps/"
